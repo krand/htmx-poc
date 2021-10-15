@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+
+    <script type="text/javascript" th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/hyperscript.org/dist/_hyperscript.min.js}"></script>
+    <style type="text/css">
+.selected {
+    color: red;
+}
+    </style>
+</head>
+<body>
+<div id="tabs" hx-target="#tab-contents" _="on htmx:afterOnLoad take .selected for event.target">
+    <a hx-get="/tab1" hx-push-url="?L1=tab1" th:class="${stateL1 == 'tab1' OR stateL1 == null}? 'selected'">Tab 1</a>
+    <a hx-get="/tab2" hx-push-url="?L1=tab2" th:class="${stateL1 == 'tab2'}? 'selected'">Tab 2</a>
+</div>
+<hr/>
+<div id="tab-contents" th:hx-get="'/'+${stateL1?:'tab1'}" hx-trigger="load"></div>
+
+</body>
+</html>

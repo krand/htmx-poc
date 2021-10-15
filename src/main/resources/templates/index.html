@@ -13,12 +13,14 @@
     </style>
 </head>
 <body>
-<div id="tabs" hx-target="#tab-contents" _="on htmx:afterOnLoad take .selected for event.target">
-    <a hx-get="/tab1" hx-push-url="?L1=tab1" th:class="${stateL1 == 'tab1' OR stateL1 == null}? 'selected'">Tab 1</a>
-    <a hx-get="/tab2" hx-push-url="?L1=tab2" th:class="${stateL1 == 'tab2'}? 'selected'">Tab 2</a>
+<div hx-target="#tab-contents" _="on htmx:afterOnLoad take .selected from .tabs for event.target">
+    <a th:hx-get="${'/tab1' + tail}" hx-push-url="?state_0=tab1" class="tabs" th:classappend="${states[0] == 'tab1' OR states[0] == null}? 'selected'">Tab
+        1</a>
+    <a th:hx-get="${'/tab2' + tail}" hx-push-url="?state_0=tab2" class="tabs" th:classappend="${states[0] == 'tab2'}? 'selected'">Tab 2</a>
 </div>
 <hr/>
-<div id="tab-contents" th:hx-get="'/'+${stateL1?:'tab1'}" hx-trigger="load"></div>
+<div id="tab-contents" th:hx-get="${'/' + (states[0]?:'tab1') + tail}" hx-trigger="load"></div>
 
+    <script type="text/javascript">htmx.logAll();</script>
 </body>
 </html>

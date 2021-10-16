@@ -1,3 +1,19 @@
 <div>
     <h1>OP1</h1>
+    <div hx-get="/tab1/tab1-op1/f1" hx-trigger="load" hx-target="#f1">
+        <div>
+            <label>F1</label>
+            <select name="f1" id="f1" hx-get="/tab1/tab1-op1/f2" hx-target="#f2">
+            </select>
+        </div>
+        <div>
+            <label>F2</label>
+            <select name="f2" id="f2">
+            </select>
+        </div>
+    </div>
+    <div>
+        <table id="data" hx-get="/tab1/tab1-op1/data" hx-trigger="load, change from:#f2, htmx:afterSettle from:#f2" hx-include="[name='f1'],[name='f2']">
+        </table>
+    </div>
 </div>

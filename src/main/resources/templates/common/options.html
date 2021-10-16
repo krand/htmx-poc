@@ -1,1 +1,1 @@
-<option th:each="option : ${options}" th:value="${option.name}" th:text="${option.label}"></option>
+<option th:each="option : ${options}" th:value="${option.name}" th:text="${option.label}" th:selected="${option.name == selected}"></option>

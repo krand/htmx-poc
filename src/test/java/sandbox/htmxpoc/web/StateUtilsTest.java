@@ -11,7 +11,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 class StateUtilsTest {
     @Test
-    void tailQuery() {
+    void toQuery() {
         Map<String, String> params = new TreeMap<>(Map.of(
                 "state_0", "A",
                 "state_1", "B",
@@ -20,14 +20,14 @@ class StateUtilsTest {
                 "foo", "E"
         ));
 
-        String resultValue = StateUtils.tailQuery(params, 1);
+        String resultValue = StateUtils.toQuery(params);
 
-        assertThat(resultValue, Matchers.equalTo("?foo=E&param=D&state_1=B&state_2=C"));
+        assertThat(resultValue, Matchers.equalTo("?foo=E&param=D&state_0=A&state_1=B&state_2=C"));
     }
 
     @Test
-    void tailQueryEmpty() {
-        assertThat(StateUtils.tailQuery(Collections.emptyMap(), 1), Matchers.equalTo(""));
+    void toQueryEmpty() {
+        assertThat(StateUtils.toQuery(Collections.emptyMap()), Matchers.equalTo(""));
     }
 
     @Test

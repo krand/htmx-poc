@@ -14,7 +14,7 @@ public class IndexController {
     public ModelAndView index(@RequestParam Map<String, String> params) {
         return new ModelAndView("index", Map.of(
                 "states", StateUtils.states(params),
-                "tail", StateUtils.tailQuery(params, 1))
+                "originalParams", StateUtils.toQuery(params))
         );
     }
 

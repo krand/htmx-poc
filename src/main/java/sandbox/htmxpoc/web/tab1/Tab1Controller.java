@@ -13,20 +13,23 @@ import java.util.Map;
 @RequestMapping("/tab1")
 public class Tab1Controller {
     @GetMapping
-    ModelAndView content(@RequestParam Map<String, String> params) {
+    public ModelAndView content(@RequestParam Map<String, String> params) {
         return new ModelAndView("tab1", Map.of(
                 "states", StateUtils.states(params),
-                "tail", StateUtils.tailQuery(params, 2))
+                "originalParams", StateUtils.toQuery(params))
         );
     }
 
     @GetMapping("tab1-op1")
-    String op1() {
-        return "tab1-op1";
+    public ModelAndView op1(@RequestParam Map<String, String> params) {
+        return new ModelAndView("tab1-op1", Map.of(
+                "states", StateUtils.states(params),
+                "originalParams", StateUtils.toQuery(params))
+        );
     }
 
     @GetMapping("tab1-op2")
-    String op2() {
+    public String op2() {
         return "tab1-op2";
     }
 

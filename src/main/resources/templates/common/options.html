@@ -1,1 +1,2 @@
+<option th:if="${emptyOption}" name=""></option>
 <option th:each="option : ${options}" th:value="${option.name}" th:text="${option.label}" th:selected="${option.name == selected}"></option>

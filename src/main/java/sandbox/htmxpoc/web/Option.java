@@ -4,6 +4,6 @@ import lombok.Value;
 
 @Value
 public class Option {
-    private final String name;
+    private final Object name;
     private final String label;
 }

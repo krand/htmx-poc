@@ -1,2 +1,16 @@
 spring:
   profiles.active: dev
+
+  database:
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+    url: "jdbc:hsqldb:mem:mymemdb"
+    username: sa
+    password:
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate.hbm2ddl.halt_on_error: true
+      hibernate.hbm2ddl.import_files_sql_extractor: org.hibernate.tool.hbm2ddl.MultipleLinesSqlCommandExtractor
+      hibernate.hbm2ddl.delimiter: ';'

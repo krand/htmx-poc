@@ -1,4 +1,4 @@
-package sandbox.htmxpoc.web.tab1;
+package sandbox.htmxpoc.web.cars;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,27 +10,27 @@ import sandbox.htmxpoc.web.StateUtils;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/tab1")
-public class Tab1Controller {
+@RequestMapping("/cars-tab")
+public class CarsTabController {
     @GetMapping
     public ModelAndView content(@RequestParam Map<String, String> params) {
-        return new ModelAndView("tab1", Map.of(
+        return new ModelAndView("cars/cars-tab", Map.of(
                 "states", StateUtils.states(params),
                 "originalParams", StateUtils.toQuery(params))
         );
     }
 
-    @GetMapping("tab1-op1")
-    public ModelAndView op1(@RequestParam Map<String, String> params) {
-        return new ModelAndView("tab1-op1", Map.of(
+    @GetMapping("browse-cars")
+    public ModelAndView browseCars(@RequestParam Map<String, String> params) {
+        return new ModelAndView("cars/browse-cars", Map.of(
                 "states", StateUtils.states(params),
                 "originalParams", StateUtils.toQuery(params))
         );
     }
 
     @GetMapping("tab1-op2")
-    public String op2() {
-        return "tab1-op2";
+    public String createCar() {
+        return "cars/create-car";
     }
 
 }

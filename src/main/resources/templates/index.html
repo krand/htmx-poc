@@ -14,12 +14,11 @@
 </head>
 <body>
 <div hx-target="#tab-contents" _="on htmx:afterOnLoad take .selected from .tabs for event.target">
-    <a hx-get="/tab1" hx-push-url="?state_0=tab1" class="tabs" th:classappend="${states[0] == 'tab1' OR states[0] == null}? 'selected'">Tab
-        1</a>
+    <a hx-get="/cars-tab" hx-push-url="?state_0=cars-tab" class="tabs" th:classappend="${states[0] == 'cars-tab' OR states[0] == null}? 'selected'">Cars</a>
     <a hx-get="/tab2" hx-push-url="?state_0=tab2" class="tabs" th:classappend="${states[0] == 'tab2'}? 'selected'">Tab 2</a>
 </div>
 <hr/>
-<div id="tab-contents" th:hx-get="${'/' + (states[0]?:'tab1') + originalParams}" hx-trigger="load"></div>
+<div id="tab-contents" th:hx-get="${'/' + (states[0]?:'cars-tab') + originalParams}" hx-trigger="load"></div>
 
 <!--    <script type="text/javascript">htmx.logAll();</script>-->
 </body>

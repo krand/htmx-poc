@@ -1,4 +1,4 @@
-package sandbox.htmxpoc.web.tab1;
+package sandbox.htmxpoc.web.cars;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 @Controller
-@RequestMapping("/tab1/tab1-op1")
-public class Op1Controller {
+@RequestMapping("/cars-tab/browse-cars")
+public class BrowseCarsController {
 
     @Autowired
     private ManufacturerRepository manufacturerRepository;
@@ -29,8 +29,8 @@ public class Op1Controller {
     @Autowired
     private VehicleRepository vehicleRepository;
 
-    @GetMapping("/f1")
-    public ModelAndView filter1(@RequestParam(name = "f1", required = false) Integer selected) {
+    @GetMapping("/manufacturers")
+    public ModelAndView filter1(@RequestParam(name = "manufacturers", required = false) Integer selected) {
         List<Option> options = manufacturerRepository.findAll().stream()
                 .map(m -> new Option(m.getId(), m.getName()))
                 .toList();
@@ -41,14 +41,14 @@ public class Op1Controller {
         ));
     }
 
-    @GetMapping("/f2")
-    public ModelAndView filter2(@RequestParam(name = "f1", required = false) Integer filter1,
-                                @RequestParam(name = "f2", required = false) Integer selected) {
+    @GetMapping("/models")
+    public ModelAndView filter2(@RequestParam(name = "manufacturers", required = false) Integer manufacturerId,
+                                @RequestParam(name = "models", required = false) Integer selected) {
         List<Option> options;
-        if (filter1 == null) {
+        if (manufacturerId == null) {
             options = Collections.emptyList();
         } else {
-            options = modelRepository.findByManufacturerId(filter1).stream()
+            options = modelRepository.findByManufacturerId(manufacturerId).stream()
                     .map(m -> new Option(m.getId(), m.getName()))
                     .toList();
         }
@@ -61,16 +61,16 @@ public class Op1Controller {
 
     @GetMapping("/data")
     public ModelAndView data(HttpServletResponse response,
-                             @RequestParam(name = "f1", required = false) Integer filter1,
-                             @RequestParam(name = "f2", required = false) Integer filter2) {
+                             @RequestParam(name = "manufacturers", required = false) Integer manufacturerId,
+                             @RequestParam(name = "models", required = false) Integer modelId) {
         response.addHeader("HX-Push", StateUtils.toQuery(Map.of(
-                        "state_0", "tab1",
-                        "state_1", "tab1-op1",
-                        "f1", Objects.toString(filter1, ""),
-                        "f2", Objects.toString(filter2, "")
+                        "state_0", "cars-tab",
+                        "state_1", "browse-cars",
+                        "manufacturers", Objects.toString(manufacturerId, ""),
+                        "models", Objects.toString(modelId, "")
                 )
         ));
-        List<Object[]> rows = vehicleRepository.findAll(filter1, filter2).stream().map(v -> new Object[]{
+        List<Object[]> rows = vehicleRepository.findAll(manufacturerId, modelId).stream().map(v -> new Object[]{
                 v.getId(),
                 Optional.of(v).map(Vehicle::getManufacturer).map(Manufacturer::getName).orElse(""),
                 Optional.of(v).map(Vehicle::getModel).map(Model::getName).orElse(""),

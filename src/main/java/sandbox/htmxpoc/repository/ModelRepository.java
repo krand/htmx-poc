@@ -1,7 +1,7 @@
 package sandbox.htmxpoc.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import sandbox.htmxpoc.repository.model.Model;
+import sandbox.htmxpoc.model.Model;
 
 import java.util.List;
 

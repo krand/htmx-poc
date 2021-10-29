@@ -1,4 +1,4 @@
-package sandbox.htmxpoc.repository.model;
+package sandbox.htmxpoc.model;
 
 import lombok.Getter;
 import lombok.Setter;

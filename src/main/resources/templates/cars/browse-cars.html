@@ -1,19 +1,19 @@
 <div>
     <h1>OP1</h1>
     <div>
-        <div th:hx-get="${'/cars-tab/browse-cars/manufacturers' + originalParams}" hx-trigger="load" hx-target="#manufacturers">
+        <div th:hx-get="${'/cars-tab/manufacturers' + originalParams}" hx-trigger="load" hx-target="#manufacturers">
             <label>Manufacturer:</label>
-            <select name="manufacturers" id="manufacturers" hx-get="/cars-tab/browse-cars/models" hx-target="#models">
+            <select name="manufacturerId" id="manufacturers" hx-get="/cars-tab/models" hx-target="#models">
             </select>
         </div>
         <div>
             <label>Models:</label>
-            <select name="models" id="models" th:hx-get="${'/cars-tab/browse-cars/models' + originalParams}" hx-trigger="load" hx-params="none">
+            <select name="modelId" id="models" th:hx-get="${'/cars-tab/models' + originalParams}" hx-trigger="load" hx-params="none">
             </select>
         </div>
     </div>
-    <div>
-        <table id="data" hx-get="/cars-tab/browse-cars/data" hx-trigger="change from:#models, htmx:afterSettle from:#models" hx-include="[name='manufacturers'],[name='models']">
+    <div hx-get="/cars-tab/browse-cars/data" hx-trigger="change from:#models, htmx:afterSettle from:#models" hx-include="[name='manufacturers'],[name='models']" hx-target="#data">
+        <table id="data" _="on rowSelected(rowId) js(rowId) htmx.ajax('GET','/cars-tab/' + rowId, '#main-content') end">
         </table>
     </div>
 </div>

@@ -1,0 +1,23 @@
+<form th:object="${car}" hx-post="/cars-tab" hx-target="this" hx-swap="outerHTML">
+    <p hx-get="/cars-tab/manufacturers" hx-trigger="load" hx-target="#manufacturers" hx-swap="innerHTML">
+        <label>Manufacturer:</label>
+        <select name="manufacturerId" id="manufacturers" hx-get="/cars-tab/models" hx-target="#models" hx-swap="innerHTML">
+        </select>
+    </p>
+    <p>
+        <label>Models:</label>
+        <select name="modelId" id="models">
+        </select>
+    </p>
+    <p>
+        <label>Mileage:</label>
+        <input name="mileage" th:value="${mileage}" />
+    </p>
+    <p>
+        <label>Price:</label>
+        <input name="price" th:value="${price}" />
+    </p>
+    <p>
+        <button id="saveButton" type="submit">Save</button>
+    </p>
+</form>

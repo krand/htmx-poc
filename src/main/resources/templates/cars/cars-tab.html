@@ -5,7 +5,7 @@
                 <td hx-target="#main-content" _="on htmx:afterOnLoad take .selected from .submenus for event.target">
                     <a hx-get="/cars-tab/browse-cars" hx-push-url="?state_0=cars-tab&state_1=browse-cars" class="submenus" th:classappend="${states[1] == 'browse-cars' OR states[1] == null}? 'selected'">Browse cars</a>
                     <br>
-                    <a hx-get="/cars-tab/tab1-op2" hx-push-url="?state_0=cars-tab&state_1=tab1-op2" class="submenus" th:classappend="${states[1] == 'tab1-op2'}? 'selected'">Op 2</a>
+                    <a hx-get="/cars-tab/new" hx-push-url="?state_0=cars-tab&state_1=new" class="submenus" th:classappend="${states[1] == 'new'}? 'selected'">New</a>
                 </td>
                 <td id="main-content" th:hx-get="${'/cars-tab/' + (states[1]?:'browse-cars') + originalParams}" hx-trigger="load"></td>
             </tr>
